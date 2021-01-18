@@ -22,6 +22,6 @@ namespace SongsList.Models
         public string GenreId { get; set; }
         public Genre Genre { get; set; }
 
-        public string Slug => Name.Replace(' ', '-').ToLower() + '-' + Year.ToString();
+        public string Slug => Name?.Replace(' ', '-').ToLower() + '-' + Year?.ToString();
     }
 }
