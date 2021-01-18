@@ -11,11 +11,16 @@ namespace SongsList.Controllers
 {
     public class HomeController : Controller
     {
-
+        private SongContext Context { get; set; }
+        public HomeController(SongContext ctx)
+        {
+            Context = ctx;
+        }
 
         public IActionResult Index()
         {
-            return View();
+            var songs = Context.Songs.OrderBy(m => m.Name).ToList();
+            return View(songs);
         } 
     }
 }
