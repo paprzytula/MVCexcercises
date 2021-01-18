@@ -10,7 +10,7 @@ namespace InvestCalculator.Controllers
 {
     public class HomeController : Controller
     {
-        //public CultureInfo currency = new CultureInfo("fr-FR", false);
+        public CultureInfo currency = new CultureInfo("fr-FR", false);
         [HttpGet]
         public IActionResult Index()
         {
@@ -22,7 +22,7 @@ namespace InvestCalculator.Controllers
         {
             if (ModelState.IsValid)
             {
-                ViewBag.FutureValue = fv.Calculate();
+                ViewBag.FutureValue = fv.Calculate().ToString("c2", currency);
             }
             else
             {
