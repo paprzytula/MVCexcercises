@@ -10,7 +10,7 @@ namespace SongsList.Models
     public class Song
     {
         public int SongId { get; set; }
-        [Required(ErrorMessage ="Please enter the songs name")]
+        [Required(ErrorMessage = "Please enter the songs name")]
         public string Name { get; set; }
         [Required(ErrorMessage ="Please enter a year")]
         [RangeUntilCurrentYear(1700, ErrorMessage = "Year must be between 1700 and current year")]
