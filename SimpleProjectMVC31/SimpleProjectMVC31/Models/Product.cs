@@ -11,11 +11,11 @@ namespace SimpleProjectMVC31.Models
     public class Product
     {
         public CultureInfo currency = new CultureInfo("en-US", false);
-        public int Id { get; set; }
+        public int ProductId { get; set; }
         [Required(ErrorMessage = "Please enter the product name")]
         public string Name { get; set; }
         [Required(ErrorMessage = "Please enter the product price")]
-        [Column(TypeName = "decimal(18,2)"]
+        [Column(TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }
         [Required(ErrorMessage ="Please select the category")]
         public int CategoryId { get; set; }

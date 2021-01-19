@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SimpleProjectMVC31.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace SimpleProjectMVC31
 {
@@ -18,6 +20,7 @@ namespace SimpleProjectMVC31
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddDbContext<ShopContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ShopContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

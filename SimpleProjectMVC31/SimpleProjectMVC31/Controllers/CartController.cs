@@ -1,28 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using SimpleProjectMVC31.Models;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace SimpleProjectMVC31.Controllers
 {
-    public class HomeController : Controller
+    public class CartController : Controller
     {
-
-
         public IActionResult Index()
         {
             return View();
         }
-        [Route("[action]")]
-        public IActionResult About()
+
+        public IActionResult Add(string id)
         {
+            ViewBag.ProductSlug = id;
             return View();
         }
-
-        
     }
 }

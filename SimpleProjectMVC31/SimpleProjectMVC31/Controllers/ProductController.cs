@@ -9,14 +9,50 @@ namespace SimpleProjectMVC31.Controllers
 {
     public class ProductController : Controller
     {
-        public IActionResult Detail(string slugLink)
+        ShopContext context;
+        public ProductController(ShopContext context)
         {
-            Product product = DataBase.GetProduct(slugLink);
+            this.context = context;
+        }
+
+        public IActionResult Index()
+        {
+            return RedirectToAction("List", "Products");
+        }
+        public IActionResult Detail(int id)
+        {
+            var categories = context.Categories.OrderBy(c => c.CategoryId).ToList();
+            Product product = context.Products.Find(id);
+            var categoryName = "";
+            foreach (var cat in categories)
+            {
+                if (cat.CategoryId == product.CategoryId)
+                {
+                    categoryName = cat.Name;
+                }
+            }
+            string imageFileName = product.Code + "-m.jpg";
+            ViewBag.CategoryName = categoryName;
+            ViewBag.ImageFileName = imageFileName;
             return View(product);
         }
-        public IActionResult List()
+        [Route("[controller]s/{id?}")]
+        public IActionResult List(string id="All")
         {
-            List<Product> products = DataBase.GetProducts();
+            var categories = context.Categories.OrderBy(c => c.CategoryId).ToList();
+            List<Product> products;
+            if (id=="All")
+            {
+                products = context.Products.OrderBy(p => p.ProductId).ToList();
+            }
+            else
+            {
+                products = context.Products
+                    .Where(p => p.Category.Name == id)
+                    .OrderBy(p => p.ProductId).ToList();
+
+                ViewBag.SelectedCategoryName = id;
+            }
             return View(products);
         }
     }
