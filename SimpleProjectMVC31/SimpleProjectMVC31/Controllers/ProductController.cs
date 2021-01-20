@@ -50,15 +50,17 @@ namespace SimpleProjectMVC31.Controllers
                 products = context.Products.Where(p => p.Price < 5.0m).OrderBy(p => p.ProductId).ToList();
             }
             else
-            {
                 products = context.Products
                     .Where(p => p.Category.Name == id)
                     .OrderBy(p => p.ProductId).ToList();
 
-            }
-            ViewBag.SelectedCategoryName = id;
-            ViewBag.AllCategories = categories;
-            return View(products);
+            var model = new ProductListViewModel
+            {
+                Categories = categories,
+                Products = products,
+                SelectedCategory = id
+            };
+            return View(model);
         }
     }
 }
