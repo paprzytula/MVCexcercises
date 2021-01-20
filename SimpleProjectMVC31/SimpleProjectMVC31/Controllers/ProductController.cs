@@ -37,11 +37,11 @@ namespace SimpleProjectMVC31.Controllers
             return View(product);
         }
         [Route("[controller]s/{id?}")]
-        public IActionResult List(string id="All")
+        public IActionResult List(string id = "All")
         {
             var categories = context.Categories.OrderBy(c => c.CategoryId).ToList();
             List<Product> products;
-            if (id=="All")
+            if (id == "All")
             {
                 products = context.Products.OrderBy(p => p.ProductId).ToList();
             }
@@ -51,8 +51,9 @@ namespace SimpleProjectMVC31.Controllers
                     .Where(p => p.Category.Name == id)
                     .OrderBy(p => p.ProductId).ToList();
 
-                ViewBag.SelectedCategoryName = id;
             }
+            ViewBag.SelectedCategoryName = id;
+            ViewBag.AllCategories = categories;
             return View(products);
         }
     }

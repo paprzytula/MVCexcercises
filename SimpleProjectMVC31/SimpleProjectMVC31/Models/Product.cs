@@ -10,7 +10,6 @@ namespace SimpleProjectMVC31.Models
 {
     public class Product
     {
-        public CultureInfo currency = new CultureInfo("en-US", false);
         public int ProductId { get; set; }
         [Required(ErrorMessage = "Please enter the product name")]
         public string Name { get; set; }

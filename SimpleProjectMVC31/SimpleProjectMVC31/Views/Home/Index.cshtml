@@ -1,9 +1,12 @@
 ﻿@{
     ViewBag.Title ="Home";
 }
-<h1>Home</h1>
-<div class="list-group">
-    <a asp-controller="Product" asp-action="Detail" asp-route-slugLink="Toilet-paper-in-Australia">Toilet paper in Australia</a>
-    <a asp-controller="Product" asp-action="List">View Products</a>
-    <a asp-controller="Home" asp-action="About">About Us</a>
+<h1>Welcome to Pawels Sweets Store Demo</h1>
+<div class="row">
+    <div class="col-sm-4">
+        <div class="list-group">
+            <a asp-controller="Product" asp-action="List" class="list-group-item">View our products</a>
+            <a asp-controller="Home" asp-action="About" class="list-group-item">About us</a>
+        </div>
+    </div>
 </div>
