@@ -45,6 +45,10 @@ namespace SimpleProjectMVC31.Controllers
             {
                 products = context.Products.OrderBy(p => p.ProductId).ToList();
             }
+            else if (id=="Specials")
+            {
+                products = context.Products.Where(p => p.Price < 5.0m).OrderBy(p => p.ProductId).ToList();
+            }
             else
             {
                 products = context.Products

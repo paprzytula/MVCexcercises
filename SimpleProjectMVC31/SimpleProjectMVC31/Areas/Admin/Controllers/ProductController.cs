@@ -25,7 +25,7 @@ namespace SimpleProjectMVC31.Areas.Admin.Controllers
             return RedirectToAction("List", "Product");
         }
 
-        [Route("[area]/[controller]s/{id}")]
+        [Route("[area]/[controller]s/{id?}")]
         public IActionResult List(string id = "All")
         {
             List<Product> products;
@@ -38,7 +38,7 @@ namespace SimpleProjectMVC31.Areas.Admin.Controllers
                 products = context.Products.Where(p => p.Category.Name == id).ToList();
             }
 
-            ViewBag.Categories = categories;
+            ViewBag.AllCategories = categories;
             ViewBag.SelectedCategoryName = id;
             return View(products);
         }
