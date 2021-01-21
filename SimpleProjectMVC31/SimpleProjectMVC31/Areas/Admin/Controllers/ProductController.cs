@@ -17,7 +17,7 @@ namespace SimpleProjectMVC31.Areas.Admin.Controllers
         public ProductController(ShopContext context)
         {
             this.context = context;
-            categories = context.Categories.OrderBy(c => c.CategoryId).ToList();
+            categories = context.Categories.OrderBy(c => c.Name).ToList();
         }
 
         public IActionResult Index()
@@ -31,16 +31,20 @@ namespace SimpleProjectMVC31.Areas.Admin.Controllers
             List<Product> products;
             if (id == "All")
             {
-                products = context.Products.OrderBy(products => products.ProductId).ToList();
+                products = context.Products.OrderBy(products => products.Name).ToList();
             }
             else
             {
                 products = context.Products.Where(p => p.Category.Name == id).ToList();
             }
 
-            ViewBag.AllCategories = categories;
-            ViewBag.SelectedCategoryName = id;
-            return View(products);
+            var model = new ProductListViewModel
+            {
+                Categories = categories,
+                Products = products,
+                SelectedCategory = id
+            };
+            return View(model);
         }
 
         [HttpGet]
@@ -70,12 +74,21 @@ namespace SimpleProjectMVC31.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                var userMessage = string.Empty;
                 if (product.ProductId == 0)
+                {
 
                     context.Products.Add(product);
+                    userMessage = "You just added the product " + product.Name;
+                }
                 else
+                {
                     context.Products.Update(product);
+                    userMessage = "You just updated the product " + product.Name;
+
+                }
                 context.SaveChanges();
+                TempData["UserMessage"] = userMessage;
                 return RedirectToAction("List", "Product");
             }
             else

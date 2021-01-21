@@ -39,7 +39,7 @@ namespace SimpleProjectMVC31.Controllers
         [Route("[controller]s/{id?}")]
         public IActionResult List(string id = "All")
         {
-            var categories = context.Categories.OrderBy(c => c.CategoryId).ToList();
+            var categories = context.Categories.OrderBy(c => c.Name).ToList();
             List<Product> products;
             if (id == "All")
             {
@@ -47,7 +47,7 @@ namespace SimpleProjectMVC31.Controllers
             }
             else if (id=="Specials")
             {
-                products = context.Products.Where(p => p.Price < 5.0m).OrderBy(p => p.ProductId).ToList();
+                products = context.Products.Where(p => p.Price < 5.0m).OrderBy(p => p.Name).ToList();
             }
             else
                 products = context.Products
